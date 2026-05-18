@@ -88,6 +88,11 @@ auth:
   providers:
     # See https://backstage.io/docs/auth/guest/provider
     guest: {}
+
+    github:
+      development:
+        clientId: ${AUTH_GITHUB_CLIENT_ID}
+        clientSecret: ${AUTH_GITHUB_CLIENT_SECRET}
   # see https://backstage.io/docs/ai/mcp-actions#client-id-metadata-documents
   # to learn more about client id metadata documents
   experimentalClientIdMetadataDocuments:
@@ -110,6 +115,15 @@ catalog:
     pullRequestBranchName: backstage-integration
   rules:
     - allow: [Component, System, API, Resource, Location]
+
+  providers:
+    github:
+      providerId:
+        organization: luis-sagx
+        catalogPath: /catalog-info.yaml
+        filters:
+          branch: main
+
   locations:
     # Local example data, file locations are relative to the backend process, typically `packages/backend`
     - type: file
